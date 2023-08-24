@@ -1,5 +1,9 @@
 // HTTP comes in built-in module from node.
 const http = require('http');
+const {readFileSync} = require('fs');
+
+//Get All Files
+const homePage = readFileSync('./index.html');
 
 const server = http.createServer((req, res) => {
 
@@ -11,7 +15,7 @@ const server = http.createServer((req, res) => {
     if (url === '/') {
         //Status Message right here is optional.
         res.writeHead(200, {'content-type' : 'text/html'});
-        res.write('<h1>Home Page</h1>');
+        res.write(homePage);
         res.end();
     } else if (url === '/about') {
         res.writeHead(200, {'content-type': 'text/html'});
