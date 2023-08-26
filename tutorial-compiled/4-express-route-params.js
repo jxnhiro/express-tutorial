@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const {products} = require('./data.js');
+const {products} = require('../data.js');
 
 // API vs SSR
 
