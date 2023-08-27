@@ -12,19 +12,22 @@ const logger = require("./logger.js");
  * It is better to have the logger function in other file.
  **/
 
-app.get("/", logger, (req, res) => {
+// APP USES ORDER MATTER
+app.use(logger);
+
+app.get("/", (req, res) => {
   res.send("Home");
 });
 
-app.get("/about", logger, (req, res) => {
+app.get("/about", (req, res) => {
   res.send("About");
 });
 
-app.get("/api/products", logger, (req, res) => {
+app.get("/api/products", (req, res) => {
   res.send("Products");
 });
 
-app.get("/api/items", logger, (req, res) => {
+app.get("/api/items", (req, res) => {
   res.send("Items");
 });
 
