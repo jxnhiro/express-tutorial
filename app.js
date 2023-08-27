@@ -14,6 +14,8 @@ const logger = require("./logger.js");
 
 // APP USES ORDER MATTER
 app.use(logger);
+// This uses the middleware in routes after /api
+app.use("/api", logger);
 
 app.get("/", (req, res) => {
   res.send("Home");
