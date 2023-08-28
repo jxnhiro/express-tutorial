@@ -61,9 +61,16 @@ app.post("/login", (req, res) => {
   }
 });
 
+/**
+ * Do not think if we have a different method, we need to set a different path.
+ * Different method itself is already a different request.
+ */
+
 app.put("/api/people/:id", (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
+  // TODO: Find is to search for the one element in an array.
+  // TODO: Map is to for loop an array.
 
   //   If bracket use return keyword, but if only one-line function then do not use any return keyword.
   const person = people.find((person) => {
@@ -83,6 +90,26 @@ app.put("/api/people/:id", (req, res) => {
     }
     return person;
   });
+
+  res.status(200).json({ success: true, data: newPeople });
+});
+
+app.delete("/api/people/:id", (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  const person = people.find((person) => {
+    return person.id === Number(id);
+  });
+
+  if (!person) {
+    return res
+      .status(404)
+      .json({ success: false, msg: `no person with id ${id}` });
+  }
+
+  // Filter is mapping the array and putting it back into the array if condition is in par with the mapped member.
+  const newPeople = people.filter((person) => person.id !== Number(id));
 
   res.status(200).json({ success: true, data: newPeople });
 });
