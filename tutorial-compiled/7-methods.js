@@ -61,4 +61,30 @@ app.post("/login", (req, res) => {
   }
 });
 
+app.put("/api/people/:id", (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  //   If bracket use return keyword, but if only one-line function then do not use any return keyword.
+  const person = people.find((person) => {
+    return person.id === Number(id);
+  });
+
+  console.log(person);
+  if (!person) {
+    return res
+      .status(404)
+      .json({ success: false, msg: `no person with id ${id}` });
+  }
+
+  const newPeople = people.map((person) => {
+    if (person.id === Number(id)) {
+      person.name = name;
+    }
+    return person;
+  });
+
+  res.status(200).json({ success: true, data: newPeople });
+});
+
 app.listen(5000, () => {});
